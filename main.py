@@ -1,18 +1,21 @@
+"""poetry, pytest"""
+
+
 class Product:
-    def __init__(self, name, price, quantity, discount=0.85):
+    price = input()
+    pay_rate = 0.85
+    storage_of_goods = []
+
+    def __init__(self, name, price, quantity):
         self.name = name
         self.price = price
         self.quantity = quantity
-        self.discount = discount
+        Product.storage_of_goods.append(self)
 
-    storage_of_goods = []
     """для хранения созданных экземпляров класса"""
 
     def calculate_total_price(self):
         return self.price * self.quantity
 
     def apply_discount(self):
-        return self.price * self.discount
-
-
-
+        return self.pay_rate * self.price
