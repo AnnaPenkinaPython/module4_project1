@@ -2,7 +2,7 @@
 
 
 class Product:
-    price = input()
+    #price = input()
     pay_rate = 0.85
     storage_of_goods = []
 
