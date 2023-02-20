@@ -1,7 +1,6 @@
 import pytest
-
 from main import Product
-import arrs
+
 
 
 def test_product_init():
@@ -11,11 +10,15 @@ def test_product_init():
     assert apple.quantity == 5
 
 def test_calculate_total_price():
-    assert arrs.calculate_total_price(["orange", 50, 3]) == 150
-    assert arrs.calculate_total_price(["orange", 60, 2]) == 120
+    orange = Product("orange", 50, 3)
+    assert orange.calculate_total_price() == 150
+    assert orange. calculate_total_price() == 120
 
 def test_apply_discount():
-    assert arrs.apply_discount(["Iphone", 50000, 4]) == 42500
-    assert arrs.apply_discount(["table", 2500, 3]) == 2125
+    Iphone = Product("Iphone", 50000, 4)
+    table = Product("table", 2500, 3)
+    assert Iphone.apply_discount() == 42500
+    assert table.apply_discount() == 2125
+
 
 
