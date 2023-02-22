@@ -1,30 +1,40 @@
 """poetry, pytest"""
 from accessify import private, protected
-import pandas as pd
+# import pandas as pd
 
-data = pd.read_csv("items.csv")
+# data = pd.read_csv("items.csv")
+import csv
 
 
 class Product:
     pay_rate = 0.85
     storage_of_goods = []
 
-    def __init__(self, name, price, quantity):
-        self.__name = name
+    def __init__(self, name: str, price: int, quantity: int):
+        self.name = name
         self.price = price
         self.quantity = quantity
         Product.storage_of_goods.append(self)
 
+    @classmethod
+    def instantiate_from_csv(cls):
+        """Создаёт новые экзэмпляры из csv файла"""
+        copies = []
+        with open('items.csv', 'r', encoding="UTF-8", newline='') as csvfile:
+            reader = csv.DictReader(csvfile, delimiter=',')
+            for row in reader:
+                cls(row['name'], int(row['price']), int(row['quantity']))
+
     @property
     def long_name(self):
         try:
-            if len(self.__name) > 10:
+            if len(self.name) > 10:
                 raise Exception
             else:
-                return self.__name
+                return self.name
 
         except Exception:
-            print("Exception: данное имя превышает количество допустимых символов.")
+            print("Данное имя превышает количество допустимых символов.")
 
     @staticmethod
     def is_integer_num(n):
