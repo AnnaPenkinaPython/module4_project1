@@ -20,7 +20,7 @@ class Product:
     def instantiate_from_csv(cls):
         """Создаёт новые экзэмпляры из csv файла"""
 
-        with open('items.csv', 'r', encoding="UTF-8", newline='') as csvfile:
+        with open('/Users/annapenkina200121/Desktop/items.csv ', 'r', encoding="UTF-8", newline='') as csvfile:
             reader = csv.DictReader(csvfile, delimiter=',')
             for row in reader:
                 return cls(row['name'], int(row['price']), int(row['quantity']))
