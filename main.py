@@ -19,22 +19,22 @@ class Product:
     @classmethod
     def instantiate_from_csv(cls):
         """Создаёт новые экзэмпляры из csv файла"""
-        copies = []
+
         with open('items.csv', 'r', encoding="UTF-8", newline='') as csvfile:
             reader = csv.DictReader(csvfile, delimiter=',')
             for row in reader:
-                cls(row['name'], int(row['price']), int(row['quantity']))
+                return cls(row['name'], int(row['price']), int(row['quantity']))
 
     @property
-    def long_name(self):
-        try:
-            if len(self.name) > 10:
-                raise Exception
-            else:
-                return self.name
+    def name(self):
+        return self.__name
 
-        except Exception:
-            print("Данное имя превышает количество допустимых символов.")
+    @name.setter
+    def name(self, value: str):
+        if len(value) <= 10:
+            self.__name = value
+        else:
+            print('Exception: Длина наименования товара превышает 10 допустимых символов.')
 
     @staticmethod
     def is_integer_num(n):
@@ -44,8 +44,13 @@ class Product:
             return n.is_integer()
         return False
 
+
     def calculate_total_price(self):
         return self.price * self.quantity
 
     def apply_discount(self):
         return self.pay_rate * self.price
+
+
+Product.instantiate_from_csv()
+print(Product)
