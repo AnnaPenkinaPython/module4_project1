@@ -4,6 +4,7 @@ from accessify import private, protected
 
 # data = pd.read_csv("items.csv")
 import csv
+import os.path
 
 
 class Product:
@@ -11,16 +12,16 @@ class Product:
     storage_of_goods = []
 
     def __init__(self, name: str, price: int, quantity: int):
-        self.name = name
+        self.__name = name
         self.price = price
         self.quantity = quantity
         Product.storage_of_goods.append(self)
 
     @classmethod
-    def instantiate_from_csv(cls):
+    def instantiate_from_csv(cls, path):
         """Создаёт новые экзэмпляры из csv файла"""
-
-        with open('/Users/annapenkina200121/Desktop/items.csv ', 'r', encoding="UTF-8", newline='') as csvfile:
+        path = '../items.csv'
+        with open(path, 'r', encoding='windows-1251', newline='') as csvfile:
             reader = csv.DictReader(csvfile, delimiter=',')
             for row in reader:
                 return cls(row['name'], int(row['price']), int(row['quantity']))
@@ -52,5 +53,3 @@ class Product:
         return self.pay_rate * self.price
 
 
-Product.instantiate_from_csv()
-print(Product)

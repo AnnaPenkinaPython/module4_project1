@@ -17,5 +17,5 @@ def test_instantiate_from_csv():
     item = Product.all[-1]
     assert item.name == 'Мышка'
     assert item.price == '50'
-    assert item.amount == '5'
+    assert item.quantity == '5'
 
