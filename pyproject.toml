@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "third-module1"
+version = "0.1.0"
+description = "description"
+authors = ["Anna Penkina <annapenkina200121@mail.ru>"]
+readme = "README.md"
+packages = [{include = "third_module1"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+requests = "^2.23.0"
+accessify = "^0.3.1"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.2.1"
+pytest-cov = "^4.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
