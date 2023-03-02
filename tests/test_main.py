@@ -2,20 +2,10 @@ import pytest
 from main import Product
 import os
 
-def test_name():
-    name1 = Product("Серыйхолодильник3000", 10000, 5)
-    assert name1.name == 'Серыйхолодильник3000'
+def test_product_repr():
+    item = Product('iphone', 100000, 5)
+    assert item.__repr__() == 'iphone в наличии, цена: 100000, кол-во: 5'
 
-
-def test_is_integer():
-    assert Product.is_integer_num(5) is True
-    assert Product.is_integer_num(5.0) is True
-    assert Product.is_integer_num(5.5) is False
-
-def test_instantiate_from_csv():
-    item = Product.instantiate_from_csv(os.path.join("tests", "test.csv"))
-
-    assert item.name == 'Смартфон'
-    assert item.price == 100
-    assert item.quantity == 1
-
+def test_product_str():
+    item = Product('iphone', 100000, 5)
+    assert item.__str__() == 'стоимость iphone со скидкой = 85000.0'
