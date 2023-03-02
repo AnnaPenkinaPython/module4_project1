@@ -17,6 +17,15 @@ class Product:
         self.quantity = quantity
         Product.storage_of_goods.append(self)
 
+
+    def __repr__(self):
+        return f'{self.__name} в наличии, цена: {self.price}, кол-во: {self.quantity}'
+
+    def __str__(self):
+        return f'стоимость {self.__name} со скидкой = {self.price * 0.85}'
+
+
+
     @classmethod
     def instantiate_from_csv(cls, path):
         """Создаёт новые экзэмпляры из csv файла"""
