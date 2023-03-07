@@ -67,14 +67,12 @@ class Phone(Product):
         self.number_of_sim = number_of_sim
         Phone.number_of_sim.append(self)
 
-    @property
-    def is_zero(self):
-        return self.number_of_sim
 
-    @is_zero.setter
-    def is_zero(self, value: int):
+
+    @staticmethod
+    def is_zero(self):
         if self.number_of_sim > 0:
-            self.number_of_sim = value
+            return self.number_of_sim
         if self.number_of_sim <= 0:
             raise Exception(f"ValueError: Количество физических SIM-карт должно быть целым числом больше нуля.")
 
