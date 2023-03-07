@@ -17,14 +17,11 @@ class Product:
         self.quantity = quantity
         Product.storage_of_goods.append(self)
 
-
     def __repr__(self):
         return f'{self.__name} в наличии, цена: {self.price}, кол-во: {self.quantity}'
 
     def __str__(self):
         return f'стоимость {self.__name} со скидкой = {self.price * 0.85}'
-
-
 
     @classmethod
     def instantiate_from_csv(cls, path):
@@ -54,11 +51,34 @@ class Product:
             return n.is_integer()
         return False
 
-
     def calculate_total_price(self):
         return self.price * self.quantity
 
     def apply_discount(self):
         return self.pay_rate * self.price
+
+
+class Phone(Product):
+    number_of_sim = []
+
+    def __init__(self, name: str, price: int, quantity: int,
+                 number_of_sim: int):  # переопределяем метод базового класса
+        super().__init__(name, price, quantity)
+        self.number_of_sim = number_of_sim
+        Phone.number_of_sim.append(self)
+
+    @property
+    def is_zero(self):
+        return self.number_of_sim
+
+    @is_zero.setter
+    def is_zero(self, value: int):
+        if self.number_of_sim > 0:
+            self.number_of_sim = value
+        if self.number_of_sim <= 0:
+            raise Exception(f"ValueError: Количество физических SIM-карт должно быть целым числом больше нуля.")
+
+    def __add__(self, other):
+        return Phone.storage_of_goods + Product.storage_of_goods
 
 
