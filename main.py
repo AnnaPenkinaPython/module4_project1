@@ -1,5 +1,4 @@
 """poetry, pytest"""
-from accessify import private, protected
 # import pandas as pd
 
 # data = pd.read_csv("items.csv")
@@ -17,11 +16,11 @@ class Product:
         self.quantity = quantity
         Product.storage_of_goods.append(self)
 
-    def __repr__(self):
-        return f'{self.__name} в наличии, цена: {self.price}, кол-во: {self.quantity}'
+    # def __repr__(self):
+    #    return f'{self.__name} в наличии, цена: {self.price}, кол-во: {self.quantity}'
 
-    def __str__(self):
-        return f'стоимость {self.__name} со скидкой = {self.price * 0.85}'
+    # def __str__(self):
+    #    return f'стоимость {self.__name} со скидкой = {self.price * 0.85}'
 
     @classmethod
     def instantiate_from_csv(cls, path):
@@ -67,8 +66,6 @@ class Phone(Product):
         self.number_of_sim = number_of_sim
         Phone.number_of_sim.append(self)
 
-
-
     @staticmethod
     def is_zero(self):
         if self.number_of_sim > 0:
@@ -78,5 +75,27 @@ class Phone(Product):
 
     def __add__(self, other):
         return Phone.storage_of_goods + Product.storage_of_goods
+
+
+class KeyBoard(Product):
+    def __init__(self, name: str, price: int, quantity: int, language="EN"):
+        super().__init__(name, price, quantity)
+        self.language = language
+
+
+class MixinLog(KeyBoard):
+    def __init__(self, language):
+        super().__init__(language)
+
+    def change_lang(self):
+        return self.language == "RU"
+
+print(KeyBoard.__mro__)
+kb = KeyBoard('Dark Project KD87A', 9600, 5)
+print(kb.name, kb.price, kb.quantity)
+print(kb.language)
+kb.change_lang()
+print(kb.language)
+
 
 

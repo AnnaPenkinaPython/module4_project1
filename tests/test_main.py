@@ -1,5 +1,5 @@
 import pytest
-from main import Product, Phone
+from main import Product, Phone, KeyBoard, MixinLog
 import os
 
 
@@ -21,3 +21,7 @@ def test_add():
     phone1 = Phone("Iphpne", 10000, 4, 0)
     product1 = Product("СерыйХолодильник3000", 5000, 4)
     assert phone1.quantity + product1.quantity == 8
+
+def test_change_lang():
+    kb = KeyBoard(r)
+    assert kb.change_lang ==
