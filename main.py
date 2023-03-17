@@ -77,18 +77,19 @@ class Phone(Product):
         return Phone.storage_of_goods + Product.storage_of_goods
 
 
-class KeyBoard(Product):
-    def __init__(self, name: str, price: int, quantity: int, language="EN"):
-        super().__init__(name, price, quantity)
+class MixinLog():
+    def __init__(self, language="EN"):
         self.language = language
-
-
-class MixinLog(KeyBoard):
-    def __init__(self, language):
-        super().__init__(language)
 
     def change_lang(self):
         return self.language == "RU"
+
+
+class KeyBoard(Product, MixinLog):
+    def __init__(self, name: str, price: int, quantity: int, language):
+        super().__init__(name, price, quantity)
+        self.language = language
+
 
 print(KeyBoard.__mro__)
 kb = KeyBoard('Dark Project KD87A', 9600, 5)
@@ -96,6 +97,3 @@ print(kb.name, kb.price, kb.quantity)
 print(kb.language)
 kb.change_lang()
 print(kb.language)
-
-
-
