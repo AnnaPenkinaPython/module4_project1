@@ -77,7 +77,7 @@ class Phone(Product):
         return Phone.storage_of_goods + Product.storage_of_goods
 
 
-class MixinLog():
+class MixinLog:
     def __init__(self, language="EN"):
         self.language = language
 
@@ -88,7 +88,6 @@ class MixinLog():
 class KeyBoard(Product, MixinLog):
     def __init__(self, name: str, price: int, quantity: int, language):
         super().__init__(name, price, quantity)
-        self.language = language
 
 
 print(KeyBoard.__mro__)
