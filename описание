@@ -17,3 +17,10 @@ def test_add():
     phone1 = Phone("Iphpne", 10000, 4, 0)
     product1 = Product("СерыйХолодильник3000", 5000, 4)
     assert phone1.quantity + product1.quantity == 8
+
+print(KeyBoard.__mro__)
+kb = KeyBoard('Dark Project KD87A', 9600, 5)
+print(kb.name, kb.price, kb.quantity)
+print(kb.language)
+kb.change_lang()
+print(kb.language)
