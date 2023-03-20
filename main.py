@@ -6,7 +6,7 @@ import csv
 import os.path
 
 
-class Product:
+class Item:
     pay_rate = 0.85
     storage_of_goods = []
 
@@ -14,7 +14,7 @@ class Product:
         self.__name = name
         self.price = price
         self.quantity = quantity
-        Product.storage_of_goods.append(self)
+        Item.storage_of_goods.append(self)
 
     # def __repr__(self):
     #    return f'{self.__name} в наличии, цена: {self.price}, кол-во: {self.quantity}'
@@ -57,7 +57,7 @@ class Product:
         return self.pay_rate * self.price
 
 
-class Phone(Product):
+class Phone(Item):
     number_of_sim = []
 
     def __init__(self, name: str, price: int, quantity: int,
@@ -74,23 +74,29 @@ class Phone(Product):
             raise Exception(f"ValueError: Количество физических SIM-карт должно быть целым числом больше нуля.")
 
     def __add__(self, other):
-        return Phone.storage_of_goods + Product.storage_of_goods
+        return Phone.storage_of_goods + Item.storage_of_goods
 
 
 class MixinLog:
-    def __init__(self, language="EN", **kwargs):
-        self.language = language
-        super().__init__(**kwargs)
+    __language = "EN"
 
+    @classmethod
     def change_lang(self):
-        return self.language == "RU"
+        if self.__language == "EN":
+            self.__language = "RU"
+        else:
+            self.__language = "EN"
+
+    @property
+    def language(self):
+        return self.__language
 
 
-class KeyBoard(MixinLog, Product):
-    # def __init__(self, name: str, price: int, quantity: int, language):
-    #    super().__init__(name, price, quantity)
-    def __repr__(self):
-        return f"{self.name}, {self.price}, {self.quantity}, {self.language}"
+class KeyBoard(Item, MixinLog):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.__language = "EN"
 
 
 
