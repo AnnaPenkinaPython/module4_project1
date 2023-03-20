@@ -1,5 +1,5 @@
 import pytest
-from main import Product, Phone, KeyBoard, MixinLog
+from main import Item, Phone, KeyBoard, MixinLog
 import os
 
 
