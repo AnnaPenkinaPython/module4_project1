@@ -4,6 +4,7 @@
 # data = pd.read_csv("items.csv")
 import csv
 import os.path
+from errors import InstantiateCSVError
 
 
 class Item:
@@ -55,6 +56,25 @@ class Item:
 
     def apply_discount(self):
         return self.pay_rate * self.price
+
+    @classmethod
+    def instantiate_from_csv(cls, path: str):
+        """"Считывает данные из csv-файла и создает экземпляры класса, инициализируя их данными из файла"""
+        """Если файл не найден или поврежден выбрасывает соответствующие Exception"""
+
+        if not os.path.isfile("../items.csv"):
+            raise FileNotFoundError("Отсутствует файл item.csv")
+        try:
+            with open(path, encoding='windows-1251') as csvfile:
+                reader = csv.DictReader(csvfile)
+                for row in reader:
+                    if list(row.keys()) == ['name', 'price', 'quantity']:
+                        cls(name=row['name'], price=float(row['price']), quantity=int(row['quantity']))
+                    else:
+                        raise InstantiateCSVError
+
+        except KeyError:
+            InstantiateCSVError('Файл items.csv поврежден')
 
 
 class Phone(Item):
