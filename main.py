@@ -118,5 +118,6 @@ class KeyBoard(Item, MixinLog):
         super().__init__(*args, **kwargs)
         self.__language = "EN"
 
+print()
 
 
