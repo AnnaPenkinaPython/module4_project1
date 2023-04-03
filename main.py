@@ -63,7 +63,7 @@ class Item:
         """Если файл не найден или поврежден выбрасывает соответствующие Exception"""
 
         try:
-            os.path.isfile("../items.csv"):
+            os.path.isfile("../items.csv")
         except FileNotFoundError:
             FileNotFoundError("Отсутствует файл item.csv")
         try:
