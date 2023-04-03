@@ -62,8 +62,10 @@ class Item:
         """"Считывает данные из csv-файла и создает экземпляры класса, инициализируя их данными из файла"""
         """Если файл не найден или поврежден выбрасывает соответствующие Exception"""
 
-        if not os.path.isfile("../items.csv"):
-            raise FileNotFoundError("Отсутствует файл item.csv")
+        try:
+            os.path.isfile("../items.csv"):
+        except FileNotFoundError:
+            FileNotFoundError("Отсутствует файл item.csv")
         try:
             with open(path, encoding='windows-1251') as csvfile:
                 reader = csv.DictReader(csvfile)
@@ -118,6 +120,5 @@ class KeyBoard(Item, MixinLog):
         super().__init__(*args, **kwargs)
         self.__language = "EN"
 
+
 print()
-
-
