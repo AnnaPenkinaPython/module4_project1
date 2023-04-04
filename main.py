@@ -62,8 +62,12 @@ class Item:
         """"Считывает данные из csv-файла и создает экземпляры класса, инициализируя их данными из файла"""
         """Если файл не найден или поврежден выбрасывает соответствующие Exception"""
 
+        path = '../items.csv'
         try:
-            os.path.isfile("../items.csv")
+            with open(path, 'r', encoding='windows-1251', newline='') as csvfile:
+                reader = csv.DictReader(csvfile, delimiter=',')
+                for row in reader:
+                    return cls(row['name'], int(row['price']), int(row['quantity']))
         except FileNotFoundError:
             FileNotFoundError("Отсутствует файл item.csv")
         try:
